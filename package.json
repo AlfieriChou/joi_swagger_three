@@ -1,0 +1,35 @@
+{
+  "name": "joi_swagger_three",
+  "version": "1.0.0",
+  "description": "Using swagger3.0 & joi to generate swagger.json",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlfieriChou/joi_swagger_three.git"
+  },
+  "keywords": [
+    "joi",
+    "schema"
+  ],
+  "author": "AlfieriChou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlfieriChou/joi_swagger_three/issues"
+  },
+  "homepage": "https://github.com/AlfieriChou/joi_swagger_three#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "celebrate": "^8.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "joi": "^13.5.2",
+    "joi-to-json-schema": "^3.3.0",
+    "lodash": "^4.17.10",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.3"
+  }
+}
