@@ -7,13 +7,13 @@ const generateSwagger = (modelPath = './model') => {
   // TODO 未考虑文件夹下嵌套文件夹
   const items = fs.readdirSync(modelPath)
   let methods = []
-  let definitions = {}
+  let components = {}
+  components.schemas = {}
   items.forEach(item => {
     let model = require('../model/' + item)
     item = item.replace(/\.\w+$/, '')
     let schemaName = item.slice(0, 1).toUpperCase() + item.slice(1)
     for (let index in model) {
-    
       if (index === 'schema') {
         modelSchema = convert(model[index])
         let schema = {}
@@ -21,7 +21,7 @@ const generateSwagger = (modelPath = './model') => {
           'type' : 'object',
           'properties' : modelSchema.properties
         }
-        definitions = _.merge(definitions, schema)
+        components.schemas = _.merge(components.schemas, schema)
       } else {
         content = {
           tags: model[index].tags,
@@ -30,39 +30,43 @@ const generateSwagger = (modelPath = './model') => {
           parameters : []
         }
 
-        if (model[index].validate.query) {
-          params = convert(Joi.object(model[index].validate.query))
+        if (model[index].query) {
+          params = convert(Joi.object(model[index].query))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'query'
-            field.description = params.properties[prop].description
-            field.type = params.properties[prop].type
+            field.description = model[index].summary
+            field.schema = {
+              'type' : params.properties[prop].type
+            }
             field.required = false
             content.parameters.push(field)
           }
         }
 
-        if (model[index].validate.params) {
-          params = convert(Joi.object(model[index].validate.params))
+        if (model[index].params) {
+          params = convert(Joi.object(model[index].params))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'path'
-            field.description = params.properties[prop].description
-            field.type = params.properties[prop].type
+            field.description = model[index].summary
+            field.schema = {
+              'type' : params.properties[prop].type
+            }
             field.required = true
             content.parameters.push(field)
           }
         }
 
-        if (model[index].validate.headers) {
-          params = convert(Joi.object(model[index].validate.headers))
+        if (model[index].headers) {
+          params = convert(Joi.object(model[index].headers))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'header'
-            field.description = params.properties[prop].description
+            field.description = model[index].summary
             field.items = {
               'type' : params.properties[prop].type
             }
@@ -71,27 +75,31 @@ const generateSwagger = (modelPath = './model') => {
           }
         }
 
-        if (model[index].validate.body) {
-          params = convert(Joi.object(model[index].validate.body))
-          let field = {}
-          field.in = 'body'
-          field.name = 'body'
-          field.description = model[index].description
-          field.schema = {
-            'type' : params.type,
-            'required' : params.required,
-            'properties' : params.properties
+        if (model[index].requestBody) {
+          params = convert(Joi.object(model[index].requestBody.body))
+          let request = {}
+          request.requestBody = {}
+          let bodySchema = request.requestBody
+          bodySchema.content = {
+            "application/x-www-form-urlencoded" : {
+              'schema': {
+                'type' : params.type,
+                'properties' : params.properties,
+                'required': model[index].requestBody.required
+              }
+            }
           }
-          content.parameters.push(field)
+          content.requestBody = request.requestBody
         }
 
         content.responses = {
           200: {
             'description' : 'response success',
-            'schema' : {
-              'type' : 'array',
-              'items': {
-                $ref: `#/definitions/${schemaName}`
+            'content' : {
+              'application/json' : {
+                'schema' : {
+                  $ref: `#/components/schemas/${schemaName}`
+                }
               }
             }
           }
@@ -113,13 +121,13 @@ const generateSwagger = (modelPath = './model') => {
   }
 
   let swagger = {}
-  swagger.swagger = '2.0'
+  swagger.openapi = '3.0.0'
   swagger.info = {
     'title': 'API document',
     'version': 'v3'
   }
   swagger.paths = mergeMethod
-  swagger.definitions = definitions
+  swagger.components = components
   return swagger
 }
 
