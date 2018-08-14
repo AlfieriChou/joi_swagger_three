@@ -5,6 +5,10 @@ class UserService {
     console.log('-------->', params)
     return 'Hello'
   }
+  async create (params) {
+    console.log('-------->', params)
+    return 'world'
+  }
 }
 
 const user = new UserService()
