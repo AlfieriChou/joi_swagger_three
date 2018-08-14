@@ -82,8 +82,9 @@ const generateSwagger = (modelPath = './model') => {
           let request = {}
           request.requestBody = {}
           let bodySchema = request.requestBody
+          bodySchema.required = true
           bodySchema.content = {
-            "application/x-www-form-urlencoded" : {
+            "application/json" : {
               'schema': {
                 'type' : params.type,
                 'properties' : params.properties,
