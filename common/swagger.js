@@ -26,11 +26,11 @@ const generateSwagger = (modelPath = './model') => {
         content = {
           tags: model[index].tags,
           summary: model[index].summary,
-          description: model[index].description,
-          parameters : []
+          description: model[index].description
         }
 
         if (model[index].query) {
+          content.parameters = []
           params = convert(Joi.object(model[index].query))
           for (let prop in params.properties) {
             let field = {}
@@ -46,6 +46,7 @@ const generateSwagger = (modelPath = './model') => {
         }
 
         if (model[index].params) {
+          content.parameters = []
           params = convert(Joi.object(model[index].params))
           for (let prop in params.properties) {
             let field = {}
@@ -61,6 +62,7 @@ const generateSwagger = (modelPath = './model') => {
         }
 
         if (model[index].headers) {
+          content.parameters = []
           params = convert(Joi.object(model[index].headers))
           for (let prop in params.properties) {
             let field = {}

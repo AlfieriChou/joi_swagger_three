@@ -35,7 +35,7 @@ module.exports = {
     summary: '更新标签信息',
     params: _.pick(props, ['id']),
     requestBody: {
-      required: ['tag_name']
+      body: _.pick(props, ['tag_name', 'description'])
     }
   }
 }
