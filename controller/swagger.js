@@ -1,10 +1,11 @@
 const swagger = require('../common/swagger')
 
-module.exports = {
-  index: {
-    handler: (req, res) => {
-      const data = swagger.generateSwagger()
-      res.json(data)
-    }
+class SwaggerController {
+  async doc (req, res) {
+    const result = await swagger.generateSwagger()
+    res.json(result)
   }
 }
+
+const swaggerdoc = new SwaggerController()
+module.exports = swaggerdoc

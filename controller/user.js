@@ -1,20 +1,14 @@
 const User = require('../model/user')
+// const BaseController = require('../index')
+const service = require('../service/user')
 
-module.exports = {
-  index: {
-    validate: User.index.validate,
-    handler: (req, res) => {
-      const params = req.query
-      console.log('------->', params)
-      res.json('hello')
-    }
-  },
-  create: {
-    validate: User.create.validate,
-    handler: (req, res) => {
-      const params = req.body
-      console.log('------>', params)
-      res.json('world')
-    }
+class UserController {
+  async index (req, res) {
+    const params = req.query
+    const result = await service.index(params)
+    res.json(result)
   }
 }
+
+const user = new UserController()
+module.exports = user

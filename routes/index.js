@@ -1,13 +1,11 @@
 const express = require('express')
-const {celebrate} = require('celebrate')
 const user = require('../controller/user')
 const swagger = require('../controller/swagger')
 
 const api = express.Router()
 
-api.get('/users', user.index.handler)
-api.post('/users', user.create.handler)
+api.get('/users', user.index)
 
-api.get('/swagger.json', swagger.index.handler)
+api.get('/swagger.json', swagger.doc)
 
 module.exports = api
