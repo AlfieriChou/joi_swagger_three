@@ -10,12 +10,12 @@ class UserController extends BaseController {
   }
   async create (req, res) {
     const params = req.body
-    console.log('------_>', params)
-    super.validate(User.schema, User.create, params).catch(err => {
-      return res.send(err)
+    super.validate(User.schema, User.create, params).then(async(data) => {
+      const result = await service.create(params)
+      res.json(result)
+    }).catch(err => {
+      return res.status(422).send(err)
     })
-    const result = await service.create(params)
-    res.json(result)
   }
 }
 
