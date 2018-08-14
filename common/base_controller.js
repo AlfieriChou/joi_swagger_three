@@ -11,10 +11,10 @@ class BaseController {
       jsonSchema.required = required
       const reJoi = Enjoi(jsonSchema)
       const result = Joi.validate(json, reJoi)
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         if (result.error) {
           const err = result.error.details[0].message
-          throw err
+          reject(err)
         } else {
           resolve(result)
         }
