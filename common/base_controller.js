@@ -1,7 +1,6 @@
 const Joi = require('joi')
 const Enjoi = require('enjoi')
 const convert = require('joi-to-json-schema')
-const Assert = require('assert')
 
 class BaseController {
   validate (schema, model, json, options) {

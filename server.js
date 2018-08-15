@@ -7,16 +7,16 @@ const morgan = require('morgan')
 const app = express()
 const port = process.env.PORT || 4000
 
-app.use(BodyParser.urlencoded({ extended: true}))
+app.use(BodyParser.urlencoded({extended: true}))
 app.use(BodyParser.json())
 app.use(morgan('dev'))
 
 app.use(express.static(__dirname + '/public'))
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
+  res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE')
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
 })
 

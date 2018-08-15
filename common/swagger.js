@@ -15,15 +15,15 @@ const generateSwagger = (modelPath = './model') => {
     let schemaName = item.slice(0, 1).toUpperCase() + item.slice(1)
     for (let index in model) {
       if (index === 'schema') {
-        modelSchema = convert(model[index])
+        const modelSchema = convert(model[index])
         let schema = {}
         schema[schemaName] = {
-          'type' : 'object',
-          'properties' : modelSchema.properties
+          'type': 'object',
+          'properties': modelSchema.properties
         }
         components.schemas = _.merge(components.schemas, schema)
       } else {
-        content = {
+        const content = {
           tags: model[index].tags,
           summary: model[index].summary,
           description: model[index].description
@@ -31,14 +31,14 @@ const generateSwagger = (modelPath = './model') => {
 
         if (model[index].query) {
           content.parameters = []
-          params = convert(Joi.object(model[index].query))
+          let params = convert(Joi.object(model[index].query))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'query'
             field.description = model[index].summary
             field.schema = {
-              'type' : params.properties[prop].type
+              'type': params.properties[prop].type
             }
             field.required = false
             content.parameters.push(field)
@@ -47,14 +47,14 @@ const generateSwagger = (modelPath = './model') => {
 
         if (model[index].params) {
           content.parameters = []
-          params = convert(Joi.object(model[index].params))
+          let params = convert(Joi.object(model[index].params))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'path'
             field.description = model[index].summary
             field.schema = {
-              'type' : params.properties[prop].type
+              'type': params.properties[prop].type
             }
             field.required = true
             content.parameters.push(field)
@@ -63,14 +63,14 @@ const generateSwagger = (modelPath = './model') => {
 
         if (model[index].headers) {
           content.parameters = []
-          params = convert(Joi.object(model[index].headers))
+          let params = convert(Joi.object(model[index].headers))
           for (let prop in params.properties) {
             let field = {}
             field.name = prop
             field.in = 'header'
             field.description = model[index].summary
             field.items = {
-              'type' : params.properties[prop].type
+              'type': params.properties[prop].type
             }
             field.required = true
             content.parameters.push(field)
@@ -78,16 +78,16 @@ const generateSwagger = (modelPath = './model') => {
         }
 
         if (model[index].requestBody) {
-          params = convert(Joi.object(model[index].requestBody.body))
+          let params = convert(Joi.object(model[index].requestBody.body))
           let request = {}
           request.requestBody = {}
           let bodySchema = request.requestBody
           bodySchema.required = true
           bodySchema.content = {
-            "application/json" : {
+            'application/json': {
               'schema': {
-                'type' : params.type,
-                'properties' : params.properties,
+                'type': params.type,
+                'properties': params.properties,
                 'required': model[index].requestBody.required
               }
             }
@@ -97,10 +97,10 @@ const generateSwagger = (modelPath = './model') => {
 
         content.responses = {
           200: {
-            'description' : 'response success',
-            'content' : {
-              'application/json' : {
-                'schema' : {
+            'description': 'response success',
+            'content': {
+              'application/json': {
+                'schema': {
                   $ref: `#/components/schemas/${schemaName}`
                 }
               }
@@ -110,7 +110,7 @@ const generateSwagger = (modelPath = './model') => {
 
         let swaggerMethod = {}
         swaggerMethod[(model[index].method).toString()] = content
-        
+
         let swaggerItem = {}
         swaggerItem[(model[index].path).toString()] = swaggerMethod
         methods.push(swaggerItem)

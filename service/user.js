@@ -1,4 +1,4 @@
-const BaseService = require('../common/base_service')
+// const BaseService = require('../common/base_service')
 
 class UserService {
   async index (params) {
