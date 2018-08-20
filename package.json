@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha --exit"
+    "lint": "standard --fix",
+    "test": "nyc mocha --exit",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "repository": {
     "type": "git",
@@ -24,19 +26,20 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "celebrate": "^8.0.1",
-    "ejs": "^2.6.1",
     "enjoi": "^3.2.4",
     "express": "^4.16.3",
     "joi": "^13.5.2",
     "joi-to-json-schema": "^3.3.0",
     "lodash": "^4.17.10",
-    "morgan": "^1.9.0",
-    "nodemon": "^1.18.3",
-    "standard": "^11.0.1"
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
+    "codecov": "^3.0.4",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2",
     "should": "^13.2.3",
+    "standard": "^11.0.1",
     "supertest": "^3.1.0"
   }
 }
