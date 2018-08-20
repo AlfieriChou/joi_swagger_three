@@ -61,21 +61,21 @@ const generateSwagger = (modelPath = './model') => {
           }
         }
 
-        if (model[index].headers) {
-          content.parameters = []
-          let params = convert(Joi.object(model[index].headers))
-          for (let prop in params.properties) {
-            let field = {}
-            field.name = prop
-            field.in = 'header'
-            field.description = model[index].summary
-            field.items = {
-              'type': params.properties[prop].type
-            }
-            field.required = true
-            content.parameters.push(field)
-          }
-        }
+        // if (model[index].headers) {
+        //   content.parameters = []
+        //   let params = convert(Joi.object(model[index].headers))
+        //   for (let prop in params.properties) {
+        //     let field = {}
+        //     field.name = prop
+        //     field.in = 'header'
+        //     field.description = model[index].summary
+        //     field.items = {
+        //       'type': params.properties[prop].type
+        //     }
+        //     field.required = true
+        //     content.parameters.push(field)
+        //   }
+        // }
 
         if (model[index].requestBody) {
           let params = convert(Joi.object(model[index].requestBody.body))
