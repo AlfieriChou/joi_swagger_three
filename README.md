@@ -1,5 +1,8 @@
 # joi swagger three
 
+[![Build Status][travis-image]][travis-url]
+[![codecov][codecov-image]][codecov-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
 ### model
 
 #### props
@@ -73,3 +76,10 @@ update: {
 	params: _.pick(props, ['id'])
 }
 ```
+
+[travis-image]: https://travis-ci.org/AlfieriChou/joi_swagger_three.svg?branch=master
+[travis-url]: https://travis-ci.org/AlfieriChou/joi_swagger_three
+[codecov-image]: https://codecov.io/gh/AlfieriChou/joi_swagger_three/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/AlfieriChou/joi_swagger_three
+[daviddm-image]: https://david-dm.org/AlfieriChou/joi_swagger_three.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/AlfieriChou/joi_swagger_three
