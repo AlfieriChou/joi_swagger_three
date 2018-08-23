@@ -25,7 +25,6 @@
   "homepage": "https://github.com/AlfieriChou/joi_swagger_three#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "celebrate": "^8.0.1",
     "consolidate": "^0.15.1",
     "enjoi": "^3.2.4",
     "express": "^4.16.3",
