@@ -7,6 +7,7 @@ const api = express.Router()
 api.get('/users', user.index)
 api.post('/users', user.create)
 
-api.get('/swagger.json', swagger.doc)
+api.get('/apidoc/swagger.json', swagger.doc)
+api.get('/apidoc', swagger.index)
 
 module.exports = api

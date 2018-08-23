@@ -1,22 +1,24 @@
 const app = require('../server')
 const should = require('should')
 const request = require('supertest')
+const describe = require('mocha').describe
+const it = require('mocha').it
 
-describe('GET /users', function() {
-  it('result should be string!!', function() {
+describe('GET /users', function () {
+  it('result should be string!!', function () {
     request(app)
       .get('/users')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then(response => {
-        response.body.should.be.a.String
+        should(response.body).be.a.String
       })
   })
 })
 
-describe('POST /users', function() {
-  it('success and response.body mast be String!!', function() {
+describe('POST /users', function () {
+  it('success and response.body mast be String!!', function () {
     request(app)
       .post('/users')
       .send({phone: '13322221111', password: 'hahahahhaha'})
@@ -24,29 +26,29 @@ describe('POST /users', function() {
       .expect('Content-Type', /json/)
       .expect(200)
       .then(response => {
-        response.body.should.be.a.String
+        should(response.body).be.a.String
       })
   })
 
-  it('"password" is required', function() {
+  it('"password" is required', function () {
     request(app)
       .post('/users')
       .send({phone: '13322221111'})
       .set('Accept', 'application/json')
       .expect(422)
       .then(response => {
-        response.error.text.should.match('"password" is required')
+        should(response.error.text).match('"password" is required')
       })
   })
 
-  it('"phone" is required', function() {
+  it('"phone" is required', function () {
     request(app)
       .post('/users')
       .send({password: 'hahahahhaha'})
       .set('Accept', 'application/json')
       .expect(422)
       .then(response => {
-        response.error.text.should.match('"phone" is required')
+        should(response.error.text).match('"phone" is required')
       })
   })
 })
