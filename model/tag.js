@@ -16,7 +16,8 @@ module.exports = {
     method: 'get',
     tags: ['tags'],
     summary: '获取标签列表',
-    query: _.pick(props, ['tag_name'])
+    query: _.pick(props, ['tag_name']),
+    output: Joi.array().items(props).description('返回列表')
   },
   create: {
     path: '/tags',
