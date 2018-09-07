@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', router)
+app.use('/v1/', router)
 
 app.listen(config.port)
 console.log(`listening on port ${config.port}`)

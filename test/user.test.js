@@ -7,7 +7,7 @@ const it = require('mocha').it
 describe('GET /users', function () {
   it('result should be string!!', function () {
     request(app)
-      .get('/users')
+      .get('/v1/users')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -20,7 +20,7 @@ describe('GET /users', function () {
 describe('POST /users', function () {
   it('success and response.body mast be String!!', function () {
     request(app)
-      .post('/users')
+      .post('/v1/users')
       .send({phone: '13322221111', password: 'hahahahhaha'})
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -32,7 +32,7 @@ describe('POST /users', function () {
 
   it('"password" is required', function () {
     request(app)
-      .post('/users')
+      .post('/v1/users')
       .send({phone: '13322221111'})
       .set('Accept', 'application/json')
       .expect(422)
@@ -43,7 +43,7 @@ describe('POST /users', function () {
 
   it('"phone" is required', function () {
     request(app)
-      .post('/users')
+      .post('/v1/users')
       .send({password: 'hahahahhaha'})
       .set('Accept', 'application/json')
       .expect(422)
