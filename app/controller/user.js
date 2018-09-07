@@ -1,6 +1,6 @@
-const User = require('../model/user')
+const model = require('../model')
 const BaseController = require('../common/base_controller')
-const service = require('../service/user')
+const service = require('../service')
 
 class UserController extends BaseController {
   async index (req, res) {
@@ -10,7 +10,7 @@ class UserController extends BaseController {
   }
   async create (req, res) {
     const params = req.body
-    super.validate(User.schema, User.create, params).then(async () => {
+    super.validate(model.user.schema, model.user.create, params).then(async () => {
       const result = await service.create(params)
       res.json(result)
     }).catch(err => {
