@@ -1,13 +1,12 @@
 const express = require('express')
-const user = require('../controller/user')
-const swagger = require('../controller/swagger')
+const controller = require('../controller')
 
 const api = express.Router()
 
-api.get('/users', user.index)
-api.post('/users', user.create)
+api.get('/users', controller.user.index)
+api.post('/users', controller.user.create)
 
-api.get('/swagger.json', swagger.doc)
-api.get('/apidoc', swagger.index)
+api.get('/swagger.json', controller.swagger.doc)
+api.get('/apidoc', controller.swagger.index)
 
 module.exports = api
