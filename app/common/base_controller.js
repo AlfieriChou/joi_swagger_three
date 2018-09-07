@@ -1,18 +1,17 @@
-const Joi = require('joi')
-const Enjoi = require('enjoi')
 const convert = require('joi-to-json-schema')
+const Validator = require('jsonschema').Validator
+const v = new Validator()
 
 class BaseController {
-  validate (schema, model, json, options) {
+  async validate (schema, model, json, options) {
     const jsonSchema = convert(schema)
     if (model.requestBody) {
       const required = model.requestBody.required
       jsonSchema.required = required
-      const reJoi = Enjoi(jsonSchema)
-      const result = Joi.validate(json, reJoi)
+      const result = await v.validate(json, jsonSchema)
       return new Promise((resolve, reject) => {
-        if (result.error) {
-          const err = result.error.details[0].message
+        if (result.errors[0]) {
+          const err = result.errors[0].message
           reject(err)
         } else {
           resolve(result)

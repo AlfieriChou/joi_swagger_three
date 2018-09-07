@@ -5,17 +5,18 @@ const service = require('../service')
 class UserController extends BaseController {
   async index (req, res) {
     const params = req.query
-    const result = await service.index(params)
+    const result = await service.user.index(params)
     res.json(result)
   }
   async create (req, res) {
     const params = req.body
-    super.validate(model.user.schema, model.user.create, params).then(async () => {
-      const result = await service.create(params)
+    try {
+      await super.validate(model.user.schema, model.user.create, params)
+      const result = await service.user.create(params)
       res.json(result)
-    }).catch(err => {
-      return res.status(422).send(err)
-    })
+    } catch (err) {
+      res.status(422).send(err)
+    }
   }
 }
 
