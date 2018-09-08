@@ -1,9 +1,8 @@
-const common = require('../common')
-const generateSwagger = common.generateSwagger
+const swagger = require('../common/swagger')
 
 class SwaggerController {
   async doc (req, res) {
-    const result = await generateSwagger()
+    const result = await swagger.generateSwagger()
     res.json(result)
   }
   async index (req, res) {
