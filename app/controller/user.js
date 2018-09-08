@@ -1,6 +1,7 @@
 const model = require('../model')
-const BaseController = require('../common/base_controller')
+const common = require('../common')
 const service = require('../service')
+const BaseController = common.BaseController
 
 class UserController extends BaseController {
   async index (req, res) {

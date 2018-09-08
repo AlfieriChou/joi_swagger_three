@@ -146,6 +146,4 @@ const generateSwagger = (modelPath = './app/model') => {
   return swagger
 }
 
-module.exports = {
-  generateSwagger
-}
+module.exports = generateSwagger
