@@ -39,7 +39,7 @@ const generateSwagger = (modelPath = './app/model') => {
             let field = {}
             field.name = prop
             field.in = 'query'
-            field.description = model[index].summary
+            field.description = params.properties[prop].description
             field.schema = {
               'type': params.properties[prop].type
             }
@@ -55,7 +55,7 @@ const generateSwagger = (modelPath = './app/model') => {
             let field = {}
             field.name = prop
             field.in = 'path'
-            field.description = model[index].summary
+            field.description = params.properties[prop].description
             field.schema = {
               'type': params.properties[prop].type
             }
@@ -71,7 +71,7 @@ const generateSwagger = (modelPath = './app/model') => {
         //     let field = {}
         //     field.name = prop
         //     field.in = 'header'
-        //     field.description = model[index].summary
+        //     field.description = params.properties[prop].description
         //     field.items = {
         //       'type': params.properties[prop].type
         //     }
