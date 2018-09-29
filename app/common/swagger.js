@@ -1,21 +1,21 @@
-const fs = require('fs')
 const Joi = require('joi')
 const convert = require('joi-to-json-schema')
 const _ = require('lodash')
+const appRoot = require('app-root-path')
+const dir = require('dir_filenames')
 
-const generateSwagger = (modelPath = './app/model') => {
-  // TODO 未考虑文件夹下嵌套文件夹
-  const items = fs.readdirSync(modelPath)
+const generateSwagger = () => {
+  const items = dir(`${appRoot}/app/model`)
   _.remove(items, (n) => {
-    return n === 'index.js'
+    return n === `${appRoot}/app/model/index.js`
   })
   let methods = []
   let components = {}
   components.schemas = {}
   items.forEach(item => {
-    let model = require('../model/' + item)
-    item = item.replace(/\.\w+$/, '')
-    let schemaName = item.slice(0, 1).toUpperCase() + item.slice(1)
+    let model = require(item)
+    const fileName = item.split('/').pop().replace(/\.\w+$/, '')
+    let schemaName = fileName.slice(0, 1).toUpperCase() + fileName.slice(1)
     for (let index in model) {
       if (index === 'schema') {
         const modelSchema = convert(model[index])

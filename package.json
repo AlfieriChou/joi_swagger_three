@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/AlfieriChou/joi_swagger_three#readme",
   "dependencies": {
+    "app-root-path": "^2.1.0",
     "body-parser": "^1.18.3",
     "consolidate": "^0.15.1",
+    "dir_filenames": "^1.0.6",
     "express": "^4.16.3",
     "joi": "^13.5.2",
     "joi-to-json-schema": "^3.3.0",
