@@ -11,7 +11,7 @@
     "db:drop": "node ./migrations/drop.js",
     "db:drop:prod": "node ./migrations/drop.js prod",
     "lint": "standard --fix",
-    "test": "nyc mocha --exit",
+    "test": "NODE_ENV=test nyc mocha --exit",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "repository": {

@@ -4,11 +4,13 @@ const rfs = require('rotating-file-stream')
 const _ = require('lodash')
 const development = require('./config.default')
 const production = require('./config.prod')
+const test = require('./config.test')
 
 const env = process.env.NODE_ENV || 'development'
 const configs = {
   development: development,
-  production: production
+  production: production,
+  test: test
 }
 const defaultConfig = {
   env: env
