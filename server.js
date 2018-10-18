@@ -4,18 +4,23 @@ const router = require('./app/routes/index')
 const morgan = require('morgan')
 const engines = require('consolidate')
 const config = require('./config/index')
+const path = require('path')
 
 const app = express()
 
 app.use(BodyParser.urlencoded({extended: true}))
 app.use(BodyParser.json())
 
-app.use(morgan('dev'))
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" ":response-time" ms', {
-  stream: config.accessLogStream
-}))
+if (process.env.NODE_ENV.trim() === 'development') {
+  app.use(morgan('dev'))
+}
+if (process.env.NODE_ENV.trim() === 'production') {
+  app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" ":response-time" ms', {
+    stream: config.accessLogStream
+  }))
+}
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join('./public')))
 app.engine('html', engines.mustache)
 app.set('view engine', 'html')
 
