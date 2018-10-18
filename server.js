@@ -11,7 +11,7 @@ const app = express()
 app.use(BodyParser.urlencoded({extended: true}))
 app.use(BodyParser.json())
 
-if (process.env.NODE_ENV.trim() === 'development' || process.env.NODE_ENV.trim() === 'test') {
+if (process.env.NODE_ENV.trim() === 'development') {
   app.use(morgan('dev'))
 }
 if (process.env.NODE_ENV.trim() === 'production') {
