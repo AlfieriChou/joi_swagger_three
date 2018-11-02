@@ -3,6 +3,7 @@
 [![Build Status][travis-image]][travis-url]
 [![codecov][codecov-image]][codecov-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
+[![license][license-image]][license-url]
 
 [![standard][standard-image]][standard-url]
 
@@ -87,6 +88,8 @@ update: {
 [codecov-url]: https://codecov.io/gh/AlfieriChou/joi_swagger_three
 [daviddm-image]: https://david-dm.org/AlfieriChou/joi_swagger_three.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/AlfieriChou/joi_swagger_three
+[license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[license-url]: https://opensource.org/licenses/MIT
 [standard-image]:
 https://cdn.rawgit.com/standard/standard/master/badge.svg
 [standard-url]:
