@@ -3,7 +3,9 @@
 [![Build Status][travis-image]][travis-url]
 [![codecov][codecov-image]][codecov-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
-[![standard][standard-image][standard-url]]
+
+[![standard][standard-image]][standard-url]
+
 ### model
 
 #### props
