@@ -3,6 +3,7 @@
 [![Build Status][travis-image]][travis-url]
 [![codecov][codecov-image]][codecov-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
+[![standard][standard-image][standard-url]]
 ### model
 
 #### props
@@ -84,3 +85,7 @@ update: {
 [codecov-url]: https://codecov.io/gh/AlfieriChou/joi_swagger_three
 [daviddm-image]: https://david-dm.org/AlfieriChou/joi_swagger_three.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/AlfieriChou/joi_swagger_three
+[standard-image]:
+https://cdn.rawgit.com/standard/standard/master/badge.svg
+[standard-url]:
+https://github.com/standard/standard
