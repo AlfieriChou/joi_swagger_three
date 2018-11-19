@@ -1,5 +1,7 @@
 # joi swagger three
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/AlfieriChou/joi_swagger_three.svg)](https://greenkeeper.io/)
+
 [![Build Status][travis-image]][travis-url]
 [![codecov][codecov-image]][codecov-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
