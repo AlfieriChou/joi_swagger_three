@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const _ = require('lodash')
+const component = require('./component')
 
 const props = {
   id: Joi.number().integer().description('id'),
@@ -16,8 +17,16 @@ module.exports = {
     method: 'get',
     tags: ['tags'],
     summary: '获取标签列表',
-    query: _.pick(props, ['tag_name']),
-    output: Joi.array().items(props).description('返回列表')
+    query: Object.assign(
+      _.pick(props, ['tag_name']),
+      component
+    ),
+    output: {
+      200: Joi.object().keys({
+        result: Joi.array().items(props).description('返回列表'),
+        component
+      })
+    }
   },
   create: {
     path: '/tags',

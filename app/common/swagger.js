@@ -9,6 +9,9 @@ const generateSwagger = (info) => {
   _.remove(items, (n) => {
     return n === `${appRoot}/app/model/index.js`
   })
+  _.remove(items, (n) => {
+    return n === `${appRoot}/app/model/component.js`
+  })
   let methods = []
   let components = {}
   components.schemas = {}
@@ -98,13 +101,34 @@ const generateSwagger = (info) => {
           content.requestBody = request.requestBody
         }
 
-        const schema = model[index].output ? convert(model[index].output) : {$ref: `#/components/schemas/${schemaName}`}
-        content.responses = {
-          200: {
-            'description': 'response success',
-            'content': {
-              'application/json': {
-                'schema': schema
+        if (model[index].output) {
+          const response = model[index].output
+          const outputTemp = {}
+          const keys = _.keys(response)
+          let resp = {}
+          keys.forEach(key => {
+            resp[key] = {
+              'description': 'response',
+              'content': {
+                'application/json': {
+                  'schema': {
+                    type: convert(response[key]).type,
+                    properties: convert(response[key]).properties
+                  }
+                }
+              }
+            }
+            _.merge(outputTemp, resp)
+          })
+          content.responses = outputTemp
+        } else {
+          content.responses = {
+            200: {
+              'description': 'response success',
+              'content': {
+                'application/json': {
+                  'schema': {$ref: `#/components/schemas/${schemaName}`}
+                }
               }
             }
           }
