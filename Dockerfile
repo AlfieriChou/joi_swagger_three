@@ -1,4 +1,4 @@
-FROM docker.io/node:8.9.4-alpine
+FROM docker.io/node:8.14.0-alpine
 
 RUN mkdir /app/joi_swagger_three
 WORKDIR /app/joi_swagger_three
