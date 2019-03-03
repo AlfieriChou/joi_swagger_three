@@ -35,7 +35,7 @@
     "dir_filenames": "^1.0.6",
     "express": "^4.16.3",
     "joi": "^14.0.6",
-    "joi-to-json-schema": "^3.3.0",
+    "joi-to-json-schema": "^4.0.0",
     "jsonschema": "^1.2.4",
     "lodash": "^4.17.10",
     "morgan": "^1.9.0",
