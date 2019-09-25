@@ -1,6 +1,6 @@
 {
   "name": "joi_swagger_three",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Using swagger3.0 & joi to generate swagger.json",
   "main": "server.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "db:drop:prod": "node ./migrations/drop.js prod",
     "lint": "eslint --ext .js ./ --fix",
     "test": "NODE_ENV=development nyc mocha --exit",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "release": "standard-version"
   },
   "config": {
     "commitizen": {
@@ -69,7 +70,7 @@
     "nodemon": "1.19.2",
     "nyc": "14.1.1",
     "should": "13.2.3",
-    "standard": "12.0.1",
+    "standard-version": "7.0.0",
     "supertest": "4.0.2"
   }
 }
