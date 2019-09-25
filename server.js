@@ -1,14 +1,14 @@
 const express = require('express')
 const BodyParser = require('body-parser')
-const router = require('./app/routes/index')
 const morgan = require('morgan')
 const engines = require('consolidate')
-const config = require('./config/index')
 const path = require('path')
+const config = require('./config/index')
+const router = require('./app/routes/index')
 
 const app = express()
 
-app.use(BodyParser.urlencoded({extended: true}))
+app.use(BodyParser.urlencoded({ extended: true }))
 app.use(BodyParser.json())
 
 if (process.env.NODE_ENV.trim() === 'development') {
@@ -33,7 +33,9 @@ app.use((req, res, next) => {
 
 app.use('/v1/', router)
 
-app.listen(config.port)
-console.log(`listening on port ${config.port}`)
+app.listen(config.port, () => {
+  // eslint-disable-next-line no-console
+  console.log(`listening on port ${config.port}`)
+})
 
 module.exports = app

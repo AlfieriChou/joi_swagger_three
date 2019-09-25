@@ -1,53 +1,55 @@
-const app = require('../server')
 const should = require('should')
 const request = require('supertest')
-const describe = require('mocha').describe
-const it = require('mocha').it
+const { describe } = require('mocha')
+const { it } = require('mocha')
+const app = require('../server')
 
-describe('GET /users', function () {
-  it('result should be string!!', function () {
+describe('GET /users', () => {
+  it('result should be string!!', () => {
     request(app)
       .get('/v1/users')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then(response => {
+      .then((response) => {
+        // eslint-disable-next-line no-unused-expressions
         should(response.body).be.a.String
       })
   })
 })
 
-describe('POST /users', function () {
-  it('success and response.body mast be String!!', function () {
+describe('POST /users', () => {
+  it('success and response.body mast be String!!', () => {
     request(app)
       .post('/v1/users')
-      .send({phone: '13322221111', password: 'hahahahhaha'})
+      .send({ phone: '13322221111', password: 'hahahahhaha' })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then(response => {
+      .then((response) => {
+        // eslint-disable-next-line no-unused-expressions
         should(response.body).be.a.String
       })
   })
 
-  it('"password" is required', function () {
+  it('"password" is required', () => {
     request(app)
       .post('/v1/users')
-      .send({phone: '13322221111'})
+      .send({ phone: '13322221111' })
       .set('Accept', 'application/json')
       .expect(422)
-      .then(response => {
+      .then((response) => {
         should(response.error.text).match('"password" is required')
       })
   })
 
-  it('"phone" is required', function () {
+  it('"phone" is required', () => {
     request(app)
       .post('/v1/users')
-      .send({password: 'hahahahhaha'})
+      .send({ password: 'hahahahhaha' })
       .set('Accept', 'application/json')
       .expect(422)
-      .then(response => {
+      .then((response) => {
         should(response.error.text).match('"phone" is required')
       })
   })
