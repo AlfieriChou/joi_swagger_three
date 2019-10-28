@@ -6,10 +6,7 @@ const dir = path.resolve(`${appRoot}/app/model/`)
 fs.readdirSync(dir).forEach((file) => {
   if (file.match(/\.js$/) !== null && file !== 'index.js') {
     const name = file.replace('.js', '')
-    /* eslint-disable import/no-dynamic-require */
-    /* eslint-disable global-require */
+    // eslint-disable-next-line import/no-dynamic-require,global-require
     exports[name] = require(`./${file}`)
-    /* eslint-enable global-require */
-    /* eslint-enable import/no-dynamic-require */
   }
 })

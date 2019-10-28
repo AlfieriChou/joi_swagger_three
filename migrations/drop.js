@@ -6,11 +6,8 @@ const db = require('./index')
 
 let tasks = []
 fs.readdirSync(path.join('./operation')).forEach((file) => {
-  /* eslint-disable import/no-dynamic-require */
-  /* eslint-disable global-require */
+  // eslint-disable-next-line import/no-dynamic-require,global-require
   const migrations = require(path.join(__dirname, file))(db)
-  /* eslint-enable global-require */
-  /* eslint-enable import/no-dynamic-require */
   const funcArray = []
   migrations.forEach((migration) => {
     if (_.isPlainObject(migration) && migration.opt === 'drop') {

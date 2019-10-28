@@ -7,11 +7,8 @@ const db = require('./index')
 
 let tasks = []
 fs.readdirSync(`${appRoot}/migration/operation`).forEach((file) => {
-  /* eslint-disable import/no-dynamic-require */
-  /* eslint-disable global-require */
+  // eslint-disable-next-line import/no-dynamic-require,global-require
   const migrations = require(path.join(`${appRoot}/migration/operation`, file))(db)
-  /* eslint-enable global-require */
-  /* eslint-enable import/no-dynamic-require */
   const funcArray = []
   migrations.forEach((migration) => {
     if (_.isPlainObject && migration.opt === 'create') {
@@ -23,10 +20,10 @@ fs.readdirSync(`${appRoot}/migration/operation`).forEach((file) => {
             Object.entries(columns).forEach(([key, value]) => {
               if (key === 'id') {
                 t[value.type]()
-              } else if (value.type === 'float' || value === 'double' || value.type === 'decimal') {
+              } else if (['float', 'double', 'decimal'].includes(value.type)) {
                 t[value.type](key, value.precision, value.scale)
                   .defaultTo(value.default).comment(value.comment)
-              } else if (value.type === 'string' || value.type === 'varchar' || value.type === 'char') {
+              } else if (['string', 'varchar', 'char'].includes(value.type)) {
                 t[value.type](key, value.length)
                   .defaultTo(value.default).comment(value.comment)
               } else {
@@ -43,9 +40,9 @@ fs.readdirSync(`${appRoot}/migration/operation`).forEach((file) => {
         if (!exists) {
           db.schema.table(migration.table, (t) => {
             let column
-            if (migration.content.type === 'string' || migration.content.type === 'varchar' || migration.content.type === 'char') {
+            if (['string', 'varchar', 'char'].includes(migration.content.type)) {
               column = t[migration.content.type](migration.field, migration.content.length)
-            } else if (migration.content.type === 'float' || migration.content.type === 'double' || migration.content.type === 'decimal') {
+            } else if (['float', 'double', 'decimal'].includes(migration.content.type)) {
               column = t[migration.content.type](
                 migration.field, migration.content.precision, migration.content.scale
               )
